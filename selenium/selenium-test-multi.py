@@ -36,29 +36,31 @@ def auto_click_agent(url, target_selector, selector_type=By.CSS_SELECTOR):
         driver.get(url)
         print(f"成功访问页面: {driver.title}")
 
-        # 增加等待时间，确保页面元素加载完毕
-        time.sleep(3)
+        for _ in range(1000):
 
-        # 5. 定位目标元素并执行点击
-        print(f"尝试定位元素: {target_selector}")
+            # 增加等待时间，确保页面元素加载完毕
+            time.sleep(1)
 
-        # driver.find_element(定位类型, 定位值)
-        click_element = driver.find_element(selector_type, target_selector)
+            # 5. 定位目标元素并执行点击
+            print(f"尝试定位元素: {target_selector}")
 
-        # 执行点击操作
-        click_element.click()
-        print("✅ 元素点击成功！")
+            # driver.find_element(定位类型, 定位值)
+            click_element = driver.find_element(selector_type, target_selector)
 
-        # 输入文本
-        driver.find_element(By.ID, "inputSupplierName").send_keys("test supplier name")
+            # 执行点击操作
+            click_element.click()
+            print("✅ 元素点击成功！")
 
-        # 提交
-        driver.find_element(By.ID, "handleCreateSubmit").click()
+            # 输入文本
+            driver.find_element(By.ID, "inputSupplierName").send_keys("test supplier name")
 
-        # 6. 等待并验证点击结果 (可选)
-        time.sleep(2)
-        print(f"点击后的页面标题: {driver.title}")
+            # 提交
+            driver.find_element(By.ID, "handleCreateSubmit").click()
 
+            # 6. 等待并验证点击结果 (可选)
+            # time.sleep(2)
+
+            print(f"点击后的页面标题: {driver.title}")
     except NoSuchElementException:
         print(f"❌ 错误：未找到目标元素，定位符: {target_selector}")
     except Exception as e:
